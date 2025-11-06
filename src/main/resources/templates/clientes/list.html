@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="~{/fragments/header :: head (title='Lista de Clientes')}"></th:block>
+</head>
+<body>
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="container mt-4">
+  <div class="card p-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4>Clientes</h4>
+      <a class="btn btn-sm btn-primary" th:href="@{/clientes/novo}">Novo Cliente</a>
+    </div>
+    <table class="table mt-3">
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="c : ${clientes}">
+        <td th:text="${c.nome}">Nome</td>
+        <td th:text="${c.cpf}">CPF</td>
+        <td>
+          <a th:href="@{/clientes/editar/{id}(id=${c.id})}" class="btn btn-sm btn-outline-secondary">Editar</a>
+          <a th:href="@{/clientes/excluir/{id}(id=${c.id})}" class="btn btn-sm btn-danger"
+             onclick="return confirm('Tem certeza?');">Excluir</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer th:replace="~{/fragments/footer :: footer}"></footer>
+
+</body>
+</html>

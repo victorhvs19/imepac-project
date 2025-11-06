@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:with="pageTitle=${orcamento.id == null ? 'Novo Orçamento' : 'Editar Orçamento'}">
+    <th:block th:replace="~{/fragments/header :: head (title=${pageTitle})}"></th:block>
+  </th:block>
+</head>
+<body>
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="container mt-4">
+  <div class="card p-3">
+    <h4 th:text="${orcamento.id != null ? 'Editar Orçamento' : 'Novo Orçamento'}"></h4>
+
+    <form th:action="@{/orcamentos/salvar}" th:object="${orcamento}" method="post">
+      <input type="hidden" th:field="*{id}"/>
+
+      <div class="mb-3">
+        <label class="form-label">Cliente:</label>
+        <select class="form-select" th:field="*{cliente}" required>
+          <option value="">Selecione um cliente...</option>
+          <option th:each="cli : ${clientes}"
+                  th:value="${cli.id}"
+                  th:text="${cli.nome} + ' (CPF: ' + ${cli.cpf} + ')'">
+          </option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Descrição do Serviço</label>
+        <input type="text" class="form-control" th:field="*{descricao}" required/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Valor Total (R$)</label>
+        <input type="number" step="0.01" class="form-control" th:field="*{valorTotal}" required/>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a class="btn btn-secondary" th:href="@{/orcamentos}">Cancelar</a>
+    </form>
+  </div>
+</main>
+
+<footer th:replace="~{/fragments/footer :: footer}"></footer>
+
+</body>
+</html>

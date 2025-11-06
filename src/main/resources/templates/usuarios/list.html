@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="~{/fragments/header :: head (title='Lista de Usuários')}"></th:block>
+</head>
+<body>
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="container mt-4">
+  <div class="card p-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4>Usuários</h4>
+      <a class="btn btn-sm btn-primary" th:href="@{/usuarios/novo}">Novo Usuário</a>
+    </div>
+    <table class="table mt-3">
+      <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email (Login)</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="u : ${usuarios}">
+        <td th:text="${u.nome}">Nome do Usuário</td>
+        <td th:text="${u.email}">usuario@email.com</td>
+        <td>
+          <a th:href="@{/usuarios/editar/{id}(id=${u.id})}" class="btn btn-sm btn-outline-secondary">Editar</a>
+          <a th:href="@{/usuarios/excluir/{id}(id=${u.id})}" class="btn btn-sm btn-danger"
+             onclick="return confirm('Tem certeza?');">Excluir</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer th:replace="~{/fragments/footer :: footer}"></footer>
+
+</body>
+</html>

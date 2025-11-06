@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:with="pageTitle=${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}">
+    <th:block th:replace="~{/fragments/header :: head (title=${pageTitle})}"></th:block>
+  </th:block>
+</head>
+<body>
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="container mt-4">
+  <div class="card p-3">
+    <h4 th:text="${usuario.id != null ? 'Editar Usuário' : 'Novo Usuário'}"></h4>
+
+    <form th:action="@{/usuarios/salvar}" th:object="${usuario}" method="post">
+      <input type="hidden" th:field="*{id}"/>
+
+      <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" th:field="*{nome}" required/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email (Login)</label>
+        <input type="email" class="form-control" th:field="*{email}" required/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" th:field="*{senha}" required/>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a class="btn btn-secondary" th:href="@{/usuarios}">Cancelar</a>
+    </form>
+  </div>
+</main>
+
+<footer th:replace="~{/fragments/footer :: footer}"></footer>
+
+</body>
+</html>

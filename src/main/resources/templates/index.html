@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container text-center mt-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-5">
+      <h1 class="fw-bold text-primary mb-3">Bem-vindo ao Sistema ImePAC</h1>
+      <p class="lead text-secondary mb-4">
+        Selecione uma opção no menu acima para começar.
+      </p>
+
+      <div class="d-flex justify-content-center gap-3">
+        <a th:href="@{/clientes}" class="btn btn-primary btn-lg px-4">Clientes</a>
+        <a th:href="@{/usuarios}" class="btn btn-success btn-lg px-4">Usuários</a>
+        <a th:href="@{/orcamentos}" class="btn btn-warning btn-lg px-4">Orçamentos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

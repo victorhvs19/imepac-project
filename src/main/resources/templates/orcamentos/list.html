@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="~{/fragments/header :: head (title='Lista de Orçamentos')}"></th:block>
+</head>
+<body>
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="container mt-4">
+  <div class="card p-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4>Orçamentos</h4>
+      <a class="btn btn-sm btn-primary" th:href="@{/orcamentos/novo}">Novo Orçamento</a>
+    </div>
+    <table class="table mt-3">
+      <thead>
+      <tr>
+        <th>Cliente</th> <th>Descrição</th>
+        <th>Valor Total</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="o : ${orcamentos}">
+        <td th:text="${o.cliente} ? ${o.cliente.nome} : 'Sem Cliente'">Nome do Cliente</td>
+        <td th:text="${o.descricao}">Descrição do Serviço</td>
+        <td th:text="${#numbers.formatCurrency(o.valorTotal)}">R$ 100,00</td>
+        <td>
+          <a th:href="@{/orcamentos/editar/{id}(id=${o.id})}" class="btn btn-sm btn-outline-secondary">Editar</a>
+          <a th:href="@{/orcamentos/excluir/{id}(id=${o.id})}" class="btn btn-sm btn-danger"
+             onclick="return confirm('Tem certeza?');">Excluir</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer th:replace="~{/fragments/footer :: footer}"></footer>
+
+</body>
+</html>
